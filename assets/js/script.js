@@ -1,6 +1,7 @@
 // OpenWeatherMap API Key
-const apiKey = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}'; 
+const apiKey = '4c29cd470a8ea9bd88e9e1751d0fe31a'; 
 
+// Function to fetch current weather data
 // Function to fetch current weather data
 function fetchCurrentWeather(city) {
     const currentWeatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
@@ -8,24 +9,16 @@ function fetchCurrentWeather(city) {
     fetch(currentWeatherApiUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(data); // Add this line to log the API response
             // Handle the API response for current weather data
-            const cityName = data.name;
-            const date = new Date(data.dt * 1000); // Convert timestamp to date
-            const temperature = Math.round(data.main.temp - 273.15); // Convert temperature to Celsius
-            const humidity = data.main.humidity;
-            const windSpeed = data.wind.speed;
-
-            // Update the HTML elements with the weather data
-            document.getElementById('cityName').textContent = `City: ${cityName}`;
-            document.getElementById('date').textContent = `Date: ${date.toLocaleDateString()}`;
-            document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
-            document.getElementById('humidity').textContent = `Humidity: ${humidity}%`;
-            document.getElementById('windSpeed').textContent = `Wind Speed: ${windSpeed} m/s`;
+            // ...
         })
         .catch(error => {
             console.error('Error fetching current weather data:', error);
         });
 }
+
+
 
 // Function to fetch 5-day weather forecast
 function fetchFiveDayForecast(city) {

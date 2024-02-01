@@ -4,14 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div class="search-container">
-        <input type="text" id="cityInput" placeholder="Enter a city">
-        <button id="searchButton">Search</button>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        
+        <div class="search-container">
+            <input type="text" id="cityInput" placeholder="Enter a city">
+            <button id="searchButton">Search</button>
+        </div>
+        
+        <div class="weather-details">
+            <h2>Current Weather</h2>
+            <div class="current-weather">
+                <p id="cityName">City: </p>
+                <p id="date">Date: </p>
+                <p id="temperature">Temperature: </p>
+                <p id="humidity">Humidity: </p>
+                <p id="windSpeed">Wind Speed: </p>
+            </div>
+        </div>
+        
+        <div class="forecast">
+            <h2>5-Day Forecast</h2>
+            <div class="forecast-list">
+                <!-- Forecast data will be displayed here -->
+            </div>
+        </div>
     </div>
-    <div class="weather-container">
-        <!-- Weather data will be displayed here -->
-    </div>
+
+    <script src="assets/js/script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
