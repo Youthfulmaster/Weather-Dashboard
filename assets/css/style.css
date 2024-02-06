@@ -1,0 +1,31 @@
+
+
+.forecast-flex-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to new lines */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+.forecast-card {
+    /* Your existing styles for the forecast cards */
+    /* You can adjust the width, margin, padding, etc., as needed */
+    width: 200px; /* Set a fixed width for each card */
+    margin-right: 10px; /* Add spacing between cards */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+
+/* Optional: Add styles for scrollbars if needed */
+.forecast-flex-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.forecast-flex-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+.forecast-flex-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}

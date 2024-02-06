@@ -55,6 +55,10 @@ function fetchFiveDayForecast(city) {
             // Initialize an object to group forecasts by day
             const groupedForecasts = {};
 
+            // Create a flex container to display cards horizontally
+            const flexContainer = document.createElement('div');
+            flexContainer.classList.add('forecast-flex-container');
+            
             // Loop through the data to group forecasts by day and convert temperature to Fahrenheit
             data.list.forEach(forecast => {
                 const date = new Date(forecast.dt * 1000);
@@ -72,10 +76,13 @@ function fetchFiveDayForecast(city) {
                     // Create a forecast card for the day
                     const forecastCard = createForecastCard(day, temperatureFahrenheit, humidity, windSpeed);
 
-                    // Append the forecast card to the forecast container
-                    forecastContainer.appendChild(forecastCard);
+                    // Append the forecast card to the flex container
+                    flexContainer.appendChild(forecastCard);
                 }
             });
+
+            // Append the flex container to the forecast container
+            forecastContainer.appendChild(flexContainer);
         })
         .catch(error => {
             console.error('Error fetching 5-day forecast data:', error);
