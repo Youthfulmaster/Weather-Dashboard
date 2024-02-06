@@ -1,7 +1,6 @@
 // OpenWeatherMap API Key
 const apiKey = '4c29cd470a8ea9bd88e9e1751d0fe31a'; 
 
-// Function to fetch current weather data
 function fetchCurrentWeather(city) {
     const currentWeatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
@@ -15,9 +14,11 @@ function fetchCurrentWeather(city) {
             const humidityElement = document.getElementById('humidity');
             const windSpeedElement = document.getElementById('windSpeed');
 
+            const temperatureFahrenheit = (data.main.temp - 273.15) * 9/5 + 32; // Convert from Kelvin to Fahrenheit
+
             cityNameElement.textContent = `City: ${data.name}`;
             dateElement.textContent = `Date: ${new Date(data.dt * 1000).toLocaleDateString()}`;
-            temperatureElement.textContent = `Temperature: ${data.main.temp}°C`;
+            temperatureElement.textContent = `Temperature: ${temperatureFahrenheit.toFixed(2)}°F`; // Display with 2 decimal places
             humidityElement.textContent = `Humidity: ${data.main.humidity}%`;
             windSpeedElement.textContent = `Wind Speed: ${data.wind.speed} m/s`;
         })
@@ -25,6 +26,7 @@ function fetchCurrentWeather(city) {
             console.error('Error fetching current weather data:', error);
         });
 }
+
 
 
 
@@ -42,14 +44,15 @@ function fetchFiveDayForecast(city) {
             // Initialize an object to group forecasts by day
             const groupedForecasts = {};
 
-            // Loop through the data to group forecasts by day
+            // Loop through the data to group forecasts by day and convert temperature to Fahrenheit
             data.list.forEach(forecast => {
                 const date = new Date(forecast.dt * 1000);
                 const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+                const temperatureKelvin = forecast.main.temp;
+                const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32; // Convert from Kelvin to Fahrenheit
 
                 // Only add the first forecast for each day
                 if (!groupedForecasts[day]) {
-                    const temperature = forecast.main.temp;
                     const humidity = forecast.main.humidity;
                     const windSpeed = forecast.wind.speed;
 
@@ -58,7 +61,7 @@ function fetchFiveDayForecast(city) {
                     forecastCard.classList.add('forecast-card');
                     forecastCard.innerHTML = `
                         <p>${day}</p>
-                        <p>Temperature: ${temperature}°C</p>
+                        <p>Temperature: ${temperatureFahrenheit.toFixed(2)}°F</p> <!-- Display with 2 decimal places -->
                         <p>Humidity: ${humidity}%</p>
                         <p>Wind Speed: ${windSpeed} m/s</p>
                     `;
@@ -75,6 +78,7 @@ function fetchFiveDayForecast(city) {
             console.error('Error fetching 5-day forecast data:', error);
         });
 }
+
 
 
 
