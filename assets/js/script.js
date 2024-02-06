@@ -11,8 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const cityInput = document.getElementById('cityInput').value;
         fetchCurrentWeather(cityInput); // Call the fetchCurrentWeather function
         fetchFiveDayForecast(cityInput); // Call the fetchFiveDayForecast function
+
+        // Store the last searched city in local storage
+        localStorage.setItem('lastSearchedCity', cityInput);
+
+        // Display the last searched city in the top right corner
+        displayLastSearchedCity(cityInput);
     });
+
+    // Display the last searched city from local storage
+    const lastSearchedCity = localStorage.getItem('lastSearchedCity');
+    if (lastSearchedCity) {
+        displayLastSearchedCity(lastSearchedCity);
+    }
 });
+
+// Function to display the last searched city in the top right corner
+function displayLastSearchedCity(city) {
+    const localStorageDisplay = document.getElementById('localStorageDisplay');
+    localStorageDisplay.textContent = `Last Searched City: ${city}`;
+}
 
 function fetchCurrentWeather(city) {
     const currentWeatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
@@ -101,4 +119,3 @@ function createForecastCard(day, temperature, humidity, windSpeed) {
     `;
     return forecastCard;
 }
-
